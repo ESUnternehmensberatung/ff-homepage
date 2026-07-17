@@ -194,11 +194,28 @@ header.site{
 /* stat strip */
 .statstrip{
   background:var(--cream); border-bottom:1px solid var(--line);
-  padding:26px 0;
+  padding:52px 0;
 }
-.statstrip .wrap{display:flex; gap:40px; flex-wrap:wrap; align-items:baseline}
-.statstrip p{margin:0; color:var(--muted); font-size:.95rem; max-width:62ch}
-.statstrip strong{color:var(--ink); font-family:var(--serif)}
+.statgrid{display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:center}
+.statquote{
+  font-family:var(--serif); font-size:1.3rem; line-height:1.35; color:var(--ink);
+  margin:0; max-width:34ch;
+}
+.stat-tiles{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-strong); border:1px solid var(--line-strong)}
+.stat-tile{background:var(--white); padding:22px 20px; display:flex; flex-direction:column; gap:6px}
+.stat-figure{font-family:var(--serif); font-weight:600; font-size:2rem; letter-spacing:-0.02em; color:var(--green-deep); line-height:1}
+.stat-label{font-size:.82rem; color:var(--muted); line-height:1.4}
+@media (max-width:860px){
+  .statgrid{grid-template-columns:1fr}
+  .stat-tiles{grid-template-columns:1fr}
+}
+
+/* programs row: honest "trusted by" analog, real institutions instead of invented client logos */
+.programs-row{background:var(--white); border-bottom:1px solid var(--line); padding:26px 0}
+.programs-inner{display:flex; gap:28px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+.programs-label{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:var(--muted); white-space:nowrap}
+.programs-list{display:flex; gap:28px; flex-wrap:wrap}
+.programs-list span{font-family:var(--serif); font-weight:600; font-size:1rem; color:var(--muted); opacity:.75}
 
 /* ---------- Section shell ---------- */
 section{padding:118px 0}
@@ -301,24 +318,55 @@ table.ampel td.art{color:var(--muted); font-size:.88rem}
   table.ampel td.instr{font-size:1rem}
 }
 
-/* ---------- Leistungen: editorial list, not a card grid ---------- */
-.services-list{border-top:1px solid var(--line-strong)}
-.service-row{
-  display:grid; grid-template-columns:260px 1fr; gap:40px;
-  padding:30px 0; border-bottom:1px solid var(--line);
-  transition:background-color .15s var(--ease-out);
+/* ---------- Leistungen: bento grid, mixed tile sizes, no identical repeat ---------- */
+.bento{
+  display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:150px;
+  grid-auto-flow:dense; gap:18px;
+}
+.bento-tile{
+  border:1px solid var(--line); border-radius:8px; padding:24px 22px;
+  background:var(--white); grid-column:span 2; grid-row:span 1;
+  display:flex; flex-direction:column; justify-content:center;
+  transition:border-color .15s var(--ease-out), box-shadow .15s var(--ease-out);
 }
 @media (hover:hover) and (pointer:fine){
-  .service-row:hover{background-color:rgba(47,107,79,.04)}
+  .bento-tile:hover{border-color:var(--green); box-shadow:0 16px 36px -26px rgba(31,61,48,.35)}
 }
-.service-label h3{margin:0}
-.service-row .tag{
+.bento-tile .tag{
   font-family:var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--green); display:block; margin-bottom:8px;
+  color:var(--green); display:block; margin-bottom:10px;
 }
-.service-row p{color:var(--muted); font-size:1rem; margin:0; align-self:center; max-width:56ch}
-@media (max-width:700px){
-  .service-row{grid-template-columns:1fr; gap:10px; padding:24px 0}
+.bento-tile h3{margin-bottom:.4em; font-size:1.1rem}
+.bento-tile p{color:var(--muted); font-size:.9rem; margin:0}
+.bento-tile.feature{grid-column:span 2; grid-row:span 2; background:var(--headrow)}
+.bento-tile.feature h3{font-size:1.6rem}
+.bento-tile.feature p{font-size:1rem; max-width:32ch}
+
+.bento-tile.photo{
+  position:relative; grid-column:span 2; grid-row:span 1; padding:0; border:none;
+  overflow:hidden; margin:0; border-radius:8px;
+}
+.bento-tile.photo.tall{grid-row:span 2}
+.bento-tile.photo.wide{grid-column:span 4}
+.bento-tile.photo img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:grayscale(1) contrast(1.05);
+}
+.bento-tile.photo::after{
+  content:""; position:absolute; inset:0; background:var(--hero); mix-blend-mode:multiply; opacity:.6;
+}
+.bento-tile.photo::before{
+  content:""; position:absolute; inset:auto 0 0 0; height:60%; z-index:1;
+  background:linear-gradient(0deg, rgba(15,31,24,.85), transparent);
+}
+.bento-tile.photo figcaption{
+  position:absolute; left:20px; right:20px; bottom:16px; z-index:2;
+  color:var(--white); font-size:.86rem; line-height:1.4; max-width:34ch;
+}
+@media (max-width:900px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bento-tile{grid-column:span 2 !important; grid-row:span 1 !important}
+  .bento-tile.photo.tall, .bento-tile.photo.wide{grid-row:span 1}
 }
 
 /* ---------- Bericht preview (document mimicry) ---------- */
