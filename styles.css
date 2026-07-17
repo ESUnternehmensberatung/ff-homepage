@@ -150,27 +150,34 @@ header.site{
 .hero{
   background: linear-gradient(180deg, var(--hero) 0%, var(--hero-dark) 100%);
   color:var(--white);
-  padding:88px 0 76px;
+  padding:64px 0 0;
+  min-height:min(880px, 100vh);
+  display:flex; flex-direction:column; justify-content:center;
   position:relative;
   overflow:hidden;
 }
 .hero-canvas{
-  position:absolute; inset:0; width:100%; height:100%; display:block;
+  position:absolute; inset:0; width:100%; height:100%; display:block; min-height:100%;
 }
 .hero-scrim{
   position:absolute; inset:0;
   background:linear-gradient(100deg,
-    rgba(15,31,24,.92) 0%,
-    rgba(15,31,24,.62) 42%,
-    rgba(15,31,24,.18) 75%,
-    rgba(15,31,24,.05) 100%);
+    rgba(15,31,24,.90) 0%,
+    rgba(15,31,24,.56) 38%,
+    rgba(15,31,24,.14) 68%,
+    rgba(15,31,24,.32) 100%);
 }
 .hero .wrap{position:relative}
+
+.hero-grid{
+  display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:end;
+  padding:64px 0 56px;
+}
 .hero .eyebrow{color:#B9D6C4}
 .hero .eyebrow::before{background:#B9D6C4}
-.hero h1{color:var(--white); max-width:15ch}
-.hero .lede{color:#D7E6DB; max-width:46ch; font-size:1.18rem}
-.hero-ctas{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap}
+.hero h1{color:var(--white); max-width:13ch; font-size:clamp(2.6rem, 6vw, 5.6rem); line-height:0.98}
+.hero .lede{color:#D7E6DB; max-width:44ch; font-size:1.18rem}
+.hero-ctas{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap}
 .hero-ctas .cta.light{background:var(--white); color:var(--hero); border-color:var(--white)}
 .hero-ctas .cta.outline{background:transparent; color:var(--white); border-color:rgba(255,255,255,.4)}
 @media (hover:hover) and (pointer:fine){
@@ -178,10 +185,27 @@ header.site{
   .hero-ctas .cta.outline:hover{background:rgba(255,255,255,.08)}
 }
 
+.hero-stat{
+  display:flex; flex-direction:column; gap:10px;
+  padding-bottom:8px; border-left:1px solid rgba(255,255,255,.22); padding-left:28px;
+}
+.hero-stat-figure{
+  font-family:var(--serif); font-weight:600; letter-spacing:-0.03em;
+  font-size:clamp(2.6rem, 5vw, 4.4rem); line-height:1; color:var(--white);
+}
+.hero-stat-label{
+  font-size:.94rem; color:#B9D6C4; max-width:26ch; line-height:1.5;
+}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr; align-items:start}
+  .hero-stat{border-left:none; padding-left:0; padding-top:24px; border-top:1px solid rgba(255,255,255,.22); max-width:38ch}
+}
+
 .hero-provenance{
-  margin-top:52px; padding-top:22px; border-top:1px solid rgba(255,255,255,.16);
+  padding:22px 0 40px; border-top:1px solid rgba(255,255,255,.16);
   display:flex; gap:32px; flex-wrap:wrap; align-items:center;
   font-family:var(--mono); font-size:.78rem; color:#B9D6C4; letter-spacing:.02em;
+  position:relative;
 }
 
 /* stat strip */
